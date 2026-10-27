@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "fixtures": "node fixtures.js",
+    "test": "node suite.mjs",
+    "e2e": "node e2e.mjs"
+  },
+  "devDependencies": { "puppeteer-core": "24.10.0" }
+}

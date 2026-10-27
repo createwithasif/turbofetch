@@ -1,0 +1,13 @@
+import puppeteer from 'puppeteer-core';
+const b=await puppeteer.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true,pipe:true,enableExtensions:[process.argv[2]],args:['--no-first-run','--autoplay-policy=no-user-gesture-required','--window-size=1280,900']});
+await new Promise(r=>setTimeout(r,1500));
+const w=await b.targets().find(t=>t.type()==='service_worker').worker();
+await w.evaluate(()=>{self.LOG=[];chrome.webRequest.onHeadersReceived.addListener(d=>{if(/googlevideo|videoplayback/.test(d.url)){const h=n=>d.responseHeaders.find(x=>x.name.toLowerCase()===n)?.value;LOG.push([d.type,d.method,h('content-type'),h('content-length'),d.url.slice(0,90)].join(' | '))}},{urls:['<all_urls>']},['responseHeaders'])});
+const p=await b.newPage();await p.setViewport({width:1280,height:900});
+await p.goto('https://www.youtube.com/watch?v=aqz-KE-bpKQ',{waitUntil:'domcontentloaded'});
+await new Promise(r=>setTimeout(r,12000));
+const L=await w.evaluate(()=>LOG);console.log('googlevideo responses:',L.length);console.log([...new Set(L.map(l=>l.split(' | ').slice(0,3).join(' | ')))]);console.log(L.slice(0,3));
+console.log('storage:',JSON.stringify(await w.evaluate(()=>chrome.storage.session.get(null))).slice(0,400));
+console.log('video src:',await p.evaluate(()=>[...document.querySelectorAll('video')].map(v=>v.currentSrc.slice(0,60)+' '+v.getBoundingClientRect().width)));
+console.log('host:',await p.evaluate(()=>[...document.documentElement.children].map(e=>e.tagName+':'+e.style.display)));
+await b.close();

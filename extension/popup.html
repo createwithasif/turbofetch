@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body { width: 300px; margin: 0; font: 12px -apple-system, "Segoe UI", sans-serif; color: #1a1a1a; }
+      header { padding: 8px 12px; background: linear-gradient(#4a97e8, #2e78cc); color: #fff; font-weight: 600; }
+      section { padding: 10px 12px; border-bottom: 1px solid #e3e7ec; }
+      .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: #c93636; }
+      .dot.on { background: #1f8f45; }
+      label { display: flex; gap: 6px; align-items: center; }
+      .item { display: flex; justify-content: space-between; padding: 5px 0; cursor: pointer; }
+      .item:hover { color: #2e78cc; }
+      .muted { color: #5d6673; }
+    </style>
+  </head>
+  <body>
+    <header>ADM</header>
+    <section><span id="dot" class="dot"></span><span id="status">Checking…</span></section>
+    <section>
+      <label><input type="checkbox" id="enabled" /> Send browser downloads to ADM</label>
+    </section>
+    <section>
+      <div class="muted">Media on this page</div>
+      <div id="media"></div>
+    </section>
+    <script src="popup.js"></script>
+  </body>
+</html>

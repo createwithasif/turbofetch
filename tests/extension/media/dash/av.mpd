@@ -1,0 +1,3 @@
+<?xml version="1.0"?><MPD type="static" mediaPresentationDuration="PT6S"><Period>
+<AdaptationSet mimeType="video/mp4"><Representation id="v480" bandwidth="900000" height="480"><BaseURL>v480.mp4</BaseURL></Representation></AdaptationSet>
+<AdaptationSet mimeType="audio/mp4"><Representation id="a1" bandwidth="128000"><BaseURL>a.mp4</BaseURL></Representation></AdaptationSet></Period></MPD>
